@@ -1,0 +1,291 @@
+@model IEnumerable<Product>
+@{
+    ViewData["Title"] = "Trang chủ";
+    var latestBlogs = ViewBag.LatestBlogs as IEnumerable<Blog>;
+    var vi = new System.Globalization.CultureInfo("vi-VN");
+}
+
+<!-- Carousel Start -->
+<div class="container-fluid p-0 mb-5 wow fadeIn" data-wow-delay="0.1s">
+    <div id="header-carousel" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img class="w-100" src="~/img/anh.jpg" alt="Image">
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-lg-7">
+                                <h1 class="display-2 mb-5 animated slideInDown">Mì Cay - Nổ Tung Vị Giác</h1>
+                                <a asp-controller="Product" asp-action="Index" class="btn btn-primary rounded-pill py-sm-3 px-sm-5">Sản Phẩm</a>
+                                <a asp-controller="Home" asp-action="Feature" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Dịch Vụ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="carousel-item">
+                <img class="w-100" src="~/img/anh.jpg" alt="Image">
+                <div class="carousel-caption">
+                    <div class="container">
+                        <div class="row justify-content-start">
+                            <div class="col-lg-7">
+                                <h1 class="display-2 mb-5 animated slideInDown">Đỉnh Cao Mì Cay - Thách Thức Mọi Giới Hạn</h1>
+                                <a asp-controller="Product" asp-action="Index" class="btn btn-primary rounded-pill py-sm-3 px-sm-5">Sản Phẩm</a>
+                                <a asp-controller="Home" asp-action="Feature" class="btn btn-secondary rounded-pill py-sm-3 px-sm-5 ms-3">Dịch Vụ</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#header-carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Trước</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#header-carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Kế tiếp</span>
+        </button>
+    </div>
+</div>
+<!-- Carousel End -->
+<!-- About Start -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.1s">
+                <div class="about-img position-relative overflow-hidden p-5 pe-0">
+                    <img class="img-fluid w-100" src="~/img/picture.jpg">
+                </div>
+            </div>
+            <div class="col-lg-6 wow fadeIn" data-wow-delay="0.5s">
+                <h1 class="display-5 mb-4">Khám Phá Hương Vị Mì Cay Đích Thực</h1>
+                <p class="mb-4">Trải nghiệm hương vị cay nồng đặc trưng của mì cay Hàn Quốc. Sợi mì dai ngon kết hợp hoàn hảo cùng nước dùng đậm đà, được nêm nếm theo công thức gia truyền.</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Sợi mì dai và tươi ngon tự nhiên.</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Hương vị cay nồng, đậm đà từ các loại ớt tự nhiên.</p>
+                <p><i class="fa fa-check text-primary me-3"></i>Nước dùng được hầm kỹ, mang đến trải nghiệm tuyệt vời.</p>
+                <a asp-controller="Home" asp-action="About" class="btn btn-primary rounded-pill py-3 px-5 mt-3">XEM CHI TIẾT</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- About End -->
+<!-- Feature Start -->
+<div class="container-fluid bg-light bg-icon my-5 py-6">
+    <div class="container">
+        <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <h1 class="display-5 mb-3">Đặc Điểm Nổi Bật</h1>
+            <p>Khám phá hương vị mì cay đích thực với công thức nước dùng độc quyền, nguyên liệu tươi ngon và thử thách 7 cấp độ đầy kịch tính.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="bg-white text-center h-100 p-4 p-xl-5">
+                    <img class="img-fluid mb-4" src="~/img/icon 1.png" alt="">
+                    <h4 class="mb-3">Nước Dùng Đậm Đà</h4>
+                    <p class="mb-4">Kết hợp cùng gia vị chuẩn Hàn, mang lại vị ngọt thanh bùng nổ trong từng muỗng nước dùng.</p>
+                    <a asp-controller="Home" asp-action="Feature" class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill">Đọc Thêm</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="bg-white text-center h-100 p-4 p-xl-5">
+                    <img class="img-fluid mb-4" src="~/img/iconn 2.png" alt="">
+                    <h4 class="mb-3">7 Cấp Độ Thử Thách</h4>
+                    <p class="mb-4">Từ vị cay nhẹ nhàng đến siêu cay bùng cháy, chúng tôi mang đến hành trình chinh phục vị giác cho mọi tín đồ ăn cay.</p>
+                    <a asp-controller="Home" asp-action="Feature" class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill">Đọc Thêm</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="bg-white text-center h-100 p-4 p-xl-5">
+                    <img class="img-fluid mb-4" src="~/img/icon 3.png" alt="">
+                    <h4 class="mb-3">Nguyên Liệu Tươi Sạch</h4>
+                    <p class="mb-4">Hải sản tươi rói, thịt bò hảo hạng cùng rau củ xanh mát được lựa chọn kỹ lưỡng mỗi ngày để đảm bảo chất lượng tốt nhất.</p>
+                    <a asp-controller="Home" asp-action="Feature" class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill">Đọc Thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Feature End -->
+<!-- Product Start (dữ liệu lấy từ SQL Server) -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="row g-0 gx-5 align-items-end">
+            <div class="col-lg-6">
+                <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+                    <h1 class="display-5 mb-3">Thực Đơn Mì Cay.</h1>
+                    <p>Khám phá tinh túy ẩm thực với sợi mì dai ngon hòa quyện cùng nước dùng đậm đà 7 cấp độ. Nguyên liệu tươi sạch, hương vị khó quên.</p>
+                </div>
+            </div>
+            <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
+                <ul class="nav nav-pills d-inline-flex justify-content-end mb-5" id="categoryFilters">
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-primary border-2 active" data-category="all" href="javascript:void(0)">Tất cả</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-primary border-2" data-category="Mỳ Cay" href="javascript:void(0)">Mỳ Cay</a>
+                    </li>
+                    <li class="nav-item me-2">
+                        <a class="btn btn-outline-primary border-2" data-category="Đồ Uống" href="javascript:void(0)">Đồ Uống </a>
+                    </li>
+                    <li class="nav-item me-0">
+                        <a class="btn btn-outline-primary border-2" data-category="Best Seller" href="javascript:void(0)">Best Seller</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="tab-content">
+            <div id="tab-1" class="tab-pane fade show p-0 active">
+                <div class="row g-4" id="productList">
+                    @if (Model != null && Model.Any())
+                    {
+                        foreach (var product in Model)
+                        {
+                            <div class="col-xl-3 col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                                <div class="product-item">
+                                    <div class="position-relative bg-light overflow-hidden">
+                                        <img class="img-fluid w-100" src="~/img/@product.ImagePath" alt="@product.ProductName">
+                                        @if (product.IsNew)
+                                        {
+                                            <div class="bg-secondary rounded text-white position-absolute start-0 top-0 m-4 py-1 px-3">New</div>
+                                        }
+                                    </div>
+                                    <div class="text-center p-4">
+                                        <a class="d-block h5 mb-2" asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId">@product.ProductName</a>
+                                        <span class="text-primary me-1">@product.Price.ToString("N0", vi)</span>
+                                        @if (product.OldPrice.HasValue)
+                                        {
+                                            <span class="text-body text-decoration-line-through">@product.OldPrice.Value.ToString("N0", vi)</span>
+                                        }
+                                    </div>
+                                    <div class="d-flex border-top">
+                                        <small class="w-50 text-center border-end py-2">
+                                            <a class="text-body" asp-controller="Product" asp-action="Details" asp-route-id="@product.ProductId"><i class="fa fa-eye text-primary me-2"></i>Xem chi tiết</a>
+                                        </small>
+                                        <small class="w-50 text-center py-2">
+                                            <a class="text-body" href="javascript:void(0)"><i class="fa fa-shopping-bag text-primary me-2"></i>Thêm vào giỏ hàng</a>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    }
+                    else
+                    {
+                        <div class="col-12 text-center p-5">
+                            <h5 class="text-muted">Chưa có sản phẩm nào.</h5>
+                        </div>
+                    }
+                    <div class="col-12 text-center wow fadeInUp" data-wow-delay="0.1s">
+                        <a asp-controller="Product" asp-action="Index" class="btn btn-primary rounded-pill py-3 px-5">Xem thêm sản phẩm</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Product End -->
+<!-- Firm Visit Start -->
+<div class="container-fluid bg-primary bg-icon mt-5 py-6">
+    <div class="container">
+        <div class="row g-5 align-items-center">
+            <div class="col-md-7 wow fadeIn" data-wow-delay="0.1s">
+                <h1 class="display-5 text-white mb-3">Khám phá hương vị</h1>
+                <p class="text-white mb-0">Đánh thức mọi giác quan với sự kết hợp tinh tế giữa hải sản tươi và nước dùng 7 cấp độ cay nồng đặc trưng. Hãy đến và cùng chúng tôi khám phá hương vị mì cay đích thực, dai ngon đến sợi cuối cùng!</p>
+            </div>
+            <div class="col-md-5 text-md-end wow fadeIn" data-wow-delay="0.5s">
+                <a asp-controller="Home" asp-action="About" class="btn btn-lg btn-secondary rounded-pill py-3 px-5">Truy cập ngay</a>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Firm Visit End -->
+<!-- Testimonial Start -->
+<div class="container-fluid bg-light bg-icon py-6 mb-5">
+    <div class="container">
+        <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <h1 class="display-5 mb-3">Đánh Giá Của Khách Hàng</h1>
+            <p>Mỗi đánh giá là một động lực để chúng tôi hoàn thiện hơn mỗi ngày. Cảm ơn các bạn đã luôn ủng hộ và dành tình cảm đặc biệt cho quán!</p>
+        </div>
+        <div class="owl-carousel testimonial-carousel wow fadeInUp" data-wow-delay="0.1s">
+            <div class="testimonial-item position-relative bg-white p-5 mt-4">
+                <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
+                <p class="mb-4">Nước dùng mì ở đây đậm đà thực sự, vị cay nồng của mì kết hợp với ly trà sữa béo ngậy giúp cân bằng vị giác hoàn hảo. Topping bò và hải sản đều rất tươi, sợi mì dai đúng chuẩn Hàn Quốc.</p>
+                <div class="d-flex align-items-center">
+                    <img class="flex-shrink-0 rounded-circle" src="~/img/anh 1.jpg" alt="">
+                    <div class="ms-3">
+                        <h5 class="mb-1">Lưu Học Nghĩa</h5>
+                        <span>Diễn viên</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item position-relative bg-white p-5 mt-4">
+                <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
+                <p class="mb-4">Mì cay hải sản ở đây là chân ái! Kim chi ăn kèm giòn, chua ngọt rất ưa miệng. Không gian quán thoáng mát, nhân viên phục vụ cực kỳ nhanh nhẹn dù quán rất đông khách.</p>
+                <div class="d-flex align-items-center">
+                    <img class="flex-shrink-0 rounded-circle" src="~/img/anh 2.jpg" alt="">
+                    <div class="ms-3">
+                        <h5 class="mb-1">Tiêu Chiến</h5>
+                        <span>Diễn viên / Ca sĩ</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item position-relative bg-white p-5 mt-4">
+                <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
+                <p class="mb-4">Lần đầu tôi thử thách với mì cay cấp độ 7 và thực sự là một trải nghiệm bùng nổ vị giác! Rất đáng để thử nếu bạn là một tín đồ ăn cay thứ thiệt. Sẽ còn quay lại ủng hộ quán nhiều lần.</p>
+                <div class="d-flex align-items-center">
+                    <img class="flex-shrink-0 rounded-circle" src="~/img/anh 3.jpg" alt="">
+                    <div class="ms-3">
+                        <h5 class="mb-1">Vương Nhất Bác</h5>
+                        <span>Ca sĩ / MC</span>
+                    </div>
+                </div>
+            </div>
+            <div class="testimonial-item position-relative bg-white p-5 mt-4">
+                <i class="fa fa-quote-left fa-3x text-primary position-absolute top-0 start-0 mt-n4 ms-5"></i>
+                <p class="mb-4">Tôi hay đặt về nhà, dù giao hàng đi xa nhưng sợi mì vẫn giữ được độ dai, nước dùng đóng gói rất cẩn thận và vẫn còn nóng hổi. Rất hài lòng về cách đóng gói của quán.</p>
+                <div class="d-flex align-items-center">
+                    <img class="flex-shrink-0 rounded-circle" src="~/img/anh 4.jpg" alt="">
+                    <div class="ms-3">
+                        <h5 class="mb-1">Thành Nghị</h5>
+                        <span>Diễn viên</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Testimonial End -->
+<!-- Blog Start (dữ liệu lấy từ SQL Server) -->
+<div class="container-xxl py-5">
+    <div class="container">
+        <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <h1 class="display-5 mb-3">Đánh Thức Mọi Giác Quan</h1>
+            <p>Từ hương thơm nồng nàn lan tỏa trong gian bếp đến không gian ấm cúng bên ngoài, mỗi chi tiết tại đều được thiết kế để nâng niu cảm xúc của bạn.</p>
+        </div>
+        <div class="row g-4">
+            @if (latestBlogs != null && latestBlogs.Any())
+            {
+                foreach (var blog in latestBlogs)
+                {
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <img class="img-fluid" src="~/img/@blog.ImagePath" alt="@blog.Title">
+                        <div class="bg-light p-4">
+                            <a class="d-block h5 lh-base mb-4" asp-controller="Blog" asp-action="Details" asp-route-id="@blog.BlogId">@blog.Title</a>
+                            <div class="text-muted border-top pt-4">
+                                <small class="me-3"><i class="fa fa-user text-primary me-2"></i>Admin</small>
+                                <small class="me-3"><i class="fa fa-calendar text-primary me-2"></i>@blog.CreatedDate.ToString("dd/MM/yyyy")</small>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center p-5">
+                    <h5 class="text-muted">Hiện chưa có tin tức nào.</h5>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Blog End -->

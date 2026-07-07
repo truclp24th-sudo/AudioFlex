@@ -1,0 +1,54 @@
+@model IEnumerable<Order>
+@{
+    var vi = new System.Globalization.CultureInfo("vi-VN");
+}
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3 class="card-title">Danh sách đơn hàng</h3>
+    </div>
+    <div class="card-body">
+        <table class="table table-bordered table-striped align-middle">
+            <thead>
+                <tr>
+                    <th style="width:60px">#</th>
+                    <th>Khách hàng</th>
+                    <th>Số điện thoại</th>
+                    <th>Ngày đặt</th>
+                    <th>Tổng tiền</th>
+                    <th>Trạng thái</th>
+                    <th style="width:180px">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    foreach (var order in Model)
+                    {
+                        <tr>
+                            <td>@order.OrderId</td>
+                            <td>@order.CustomerName</td>
+                            <td>@order.PhoneNumber</td>
+                            <td>@order.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td>@order.TotalAmount.ToString("N0", vi) đ</td>
+                            <td>
+                                <span class="badge text-bg-info">@order.Status</span>
+                            </td>
+                            <td>
+                                <a asp-action="Details" asp-route-id="@order.OrderId" class="btn btn-sm btn-outline-primary"><i class="bi bi-eye"></i> Xem</a>
+                                <form asp-action="Delete" asp-route-id="@order.OrderId" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc muốn xóa đơn hàng này?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash3"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="7" class="text-center text-muted py-4">Chưa có đơn hàng nào.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

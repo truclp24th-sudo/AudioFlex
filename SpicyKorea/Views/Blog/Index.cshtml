@@ -1,0 +1,64 @@
+@model IEnumerable<Blog>
+@{
+    ViewData["Title"] = "Tin tức";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <h1 class="display-3 mb-3 animated slideInDown">Tin Tức</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a class="text-body" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li class="breadcrumb-item text-dark active" aria-current="page">Tin tức</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Blog Section Start -->
+<div class="container-xxl py-6">
+    <div class="container">
+        <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <h1 class="display-5 mb-3">Tin Tức Mới Nhất</h1>
+            <p>Cập nhật những ưu đãi, món ăn mới và câu chuyện về góc nhỏ mì cay của chúng tôi.</p>
+        </div>
+
+        <div id="newsContainer" class="row g-4">
+            @if (Model != null && Model.Any())
+            {
+                foreach (var blog in Model)
+                {
+                    var shortContent = blog.Content.Length > 100 ? blog.Content.Substring(0, 100) + "..." : blog.Content;
+                    <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                        <div class="news-card bg-light shadow-sm h-100 d-flex flex-column">
+                            <div class="position-relative overflow-hidden">
+                                <img class="news-img img-fluid" src="~/img/@blog.ImagePath" alt="@blog.Title">
+                                <div class="bg-primary text-white position-absolute start-0 top-0 m-3 py-1 px-3 rounded">Tin mới</div>
+                            </div>
+                            <div class="p-4 flex-grow-1 d-flex flex-column">
+                                <h5 class="news-title mb-3 fw-bold">@blog.Title</h5>
+                                <p class="news-content mb-4">@shortContent</p>
+                                <div class="mt-auto pt-3 border-top border-2 border-white d-flex justify-content-between">
+                                    <a class="text-primary fw-bold" asp-action="Details" asp-route-id="@blog.BlogId">
+                                        Xem chi tiết <i class="fa fa-arrow-right ms-2"></i>
+                                    </a>
+                                    <small class="text-body">
+                                        <i class="fa fa-calendar-alt text-primary me-2"></i>@blog.CreatedDate.ToString("dd/MM/yyyy")
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            }
+            else
+            {
+                <div class="col-12 text-center p-5">
+                    <h4 class="text-muted">Hiện tại chưa có tin tức nào được đăng tải.</h4>
+                </div>
+            }
+        </div>
+    </div>
+</div>
+<!-- Blog Section End -->

@@ -1,0 +1,22 @@
+@model ErrorViewModel
+@{
+    ViewData["Title"] = "Đã xảy ra lỗi";
+}
+
+<div class="container-fluid page-header wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <h1 class="display-3 mb-3 animated slideInDown">Lỗi hệ thống</h1>
+    </div>
+</div>
+
+<div class="container-xxl py-6">
+    <div class="container text-center">
+        <i class="bi bi-exclamation-octagon display-1 text-danger"></i>
+        <h2 class="mt-3">Rất tiếc, đã có lỗi xảy ra khi xử lý yêu cầu của bạn.</h2>
+        @if (Model != null && Model.ShowRequestId)
+        {
+            <p class="text-muted">Mã yêu cầu: <code>@Model.RequestId</code></p>
+        }
+        <a asp-controller="Home" asp-action="Index" class="btn btn-primary rounded-pill py-3 px-5 mt-3">Trở về trang chủ</a>
+    </div>
+</div>

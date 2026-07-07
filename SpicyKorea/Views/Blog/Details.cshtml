@@ -1,0 +1,36 @@
+@model Blog
+@{
+    ViewData["Title"] = Model.Title;
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <h1 class="display-3 mb-3 animated slideInDown">Chi Tiết Tin Tức</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a class="text-body" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li class="breadcrumb-item"><a class="text-body" asp-action="Index">Tin tức</a></li>
+                <li class="breadcrumb-item text-dark active" aria-current="page">@Model.Title</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<div class="container-xxl py-6">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <img class="img-fluid mb-4 w-100" src="~/img/@Model.ImagePath" alt="@Model.Title">
+                <h1 class="display-6 mb-3">@Model.Title</h1>
+                <div class="text-muted mb-4">
+                    <small class="me-3"><i class="fa fa-user text-primary me-2"></i>Admin</small>
+                    <small class="me-3"><i class="fa fa-calendar text-primary me-2"></i>@Model.CreatedDate.ToString("dd/MM/yyyy")</small>
+                </div>
+                <p class="lh-lg">@Model.Content</p>
+                <a asp-action="Index" class="btn btn-primary rounded-pill py-2 px-4 mt-3"><i class="fa fa-arrow-left me-2"></i>Quay lại Tin tức</a>
+            </div>
+        </div>
+    </div>
+</div>

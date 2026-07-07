@@ -1,0 +1,54 @@
+@{
+    ViewData["Title"] = "Ưu điểm";
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <h1 class="display-3 mb-3 animated slideInDown">Ưu Điểm</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a class="text-body" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li class="breadcrumb-item text-dark active" aria-current="page">Ưu điểm</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->
+
+<!-- Feature Start -->
+<div class="container-fluid bg-light bg-icon py-6">
+    <div class="container">
+        <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <h1 class="display-5 mb-3">Đặc Điểm Nổi Bật</h1>
+            <p>Khám phá hương vị mì cay đích thực với công thức nước dùng độc quyền, nguyên liệu tươi ngon và thử thách 7 cấp độ đầy kịch tính.</p>
+        </div>
+        <div class="row g-4">
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="bg-white text-center h-100 p-4 p-xl-5">
+                    <img class="img-fluid mb-4" src="~/img/icon 1.png" alt="">
+                    <h4 class="mb-3">Nước Dùng Đậm Đà</h4>
+                    <p class="mb-4">Kết hợp cùng gia vị chuẩn Hàn, mang lại vị ngọt thanh bùng nổ trong từng muỗng nước dùng.</p>
+                    <a asp-controller="Home" asp-action="Feature" class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill">Đọc Thêm</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.3s">
+                <div class="bg-white text-center h-100 p-4 p-xl-5">
+                    <img class="img-fluid mb-4" src="~/img/icon 2.png" alt="">
+                    <h4 class="mb-3">7 Cấp Độ Thử Thách</h4>
+                    <p class="mb-4">Từ vị cay nhẹ nhàng đến siêu cay bùng cháy, chúng tôi mang đến hành trình chinh phục vị giác cho mọi tín đồ ăn cay.</p>
+                    <a asp-controller="Home" asp-action="Feature" class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill">Đọc Thêm</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6 wow fadeInUp" data-wow-delay="0.5s">
+                <div class="bg-white text-center h-100 p-4 p-xl-5">
+                    <img class="img-fluid mb-4" src="~/img/icon 3.png" alt="">
+                    <h4 class="mb-3">Nguyên Liệu Tươi Sạch</h4>
+                    <p class="mb-4">Hải sản tươi rói, thịt bò hảo hạng cùng rau củ xanh mát được lựa chọn kỹ lưỡng mỗi ngày để đảm bảo chất lượng tốt nhất.</p>
+                    <a asp-controller="Home" asp-action="Feature" class="btn btn-outline-primary border-2 py-2 px-4 rounded-pill">Đọc Thêm</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Feature End -->
