@@ -23,25 +23,27 @@
         <div class="row g-0 gx-5 align-items-end">
             <div class="col-lg-6">
                 <div class="section-header text-start mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
-                    <h1 class="display-5 mb-3">Thực Đơn Mì Cay.</h1>
-                    <p>Khám phá tinh túy ẩm thực với sợi mì dai ngon hòa quyện cùng nước dùng đậm đà 7 cấp độ. Nguyên liệu tươi sạch, hương vị khó quên.</p>
+                    <h1 class="display-5 mb-3">Khám Phá Tai Nghe Chụp Tai.</h1>
+                    <p>Lựa chọn những mẫu tai nghe chất lượng cao với âm thanh sắc nét, thiết kế êm ái và công nghệ Bluetooth hiện đại. Phù hợp cho học tập, làm việc, giải trí và gaming.</p>
                 </div>
             </div>
             <div class="col-lg-6 text-start text-lg-end wow slideInRight" data-wow-delay="0.1s">
-                <ul class="nav nav-pills d-inline-flex justify-content-end mb-5" id="categoryFilters">
-                    <li class="nav-item me-2">
-                        <a class="btn btn-outline-primary border-2 active" data-category="all" href="javascript:void(0)">Tất cả</a>
-                    </li>
-                    <li class="nav-item me-2">
-                        <a class="btn btn-outline-primary border-2" data-category="Mỳ Cay" href="javascript:void(0)">Mỳ Cay</a>
-                    </li>
-                    <li class="nav-item me-2">
-                        <a class="btn btn-outline-primary border-2" data-category="Đồ Uống" href="javascript:void(0)">Đồ Uống </a>
-                    </li>
-                    <li class="nav-item me-0">
-                        <a class="btn btn-outline-primary border-2" data-category="Best Seller" href="javascript:void(0)">Best Seller</a>
-                    </li>
-                </ul>
+                <div class="dropdown d-inline-block mb-5">
+                    <button class="btn btn-outline-primary dropdown-toggle"
+                            type="button"
+                            id="categoryDropdown"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                        Phân loại
+                    </button>
+
+                    <ul class="dropdown-menu" id="categoryFilters">
+                        <li><a class="dropdown-item active" href="#" data-category="all">Tất cả</a></li>
+                        <li><a class="dropdown-item" href="#" data-category="Tai nghe chụp tai có dây">Tai nghe chụp tai có dây</a></li>
+                        <li><a class="dropdown-item" href="#" data-category="Tai nghe chụp tai không dây">Tai nghe chụp tai không dây</a></li>
+                        <li><a class="dropdown-item" href="#" data-category="Tai nghe nhét tai">Tai nghe nhét tai</a></li>
+                    </ul>
+                </div>
             </div>
         </div>
         <div class="tab-content">
@@ -97,8 +99,8 @@
     <div class="container">
         <div class="row g-5 align-items-center">
             <div class="col-md-7 wow fadeIn" data-wow-delay="0.1s">
-                <h1 class="display-5 text-white mb-3">Khám phá hương vị</h1>
-                <p class="text-white mb-0">Đánh thức mọi giác quan với sự kết hợp tinh tế giữa hải sản tươi và nước dùng 7 cấp độ cay nồng đặc trưng. Hãy đến và cùng chúng tôi khám phá hương vị mì cay đích thực, dai ngon đến sợi cuối cùng!</p>
+                <h1 class="display-5 text-white mb-3">Đồng Hành Cùng Mọi Khoảnh Khắc</h1>
+                <p class="text-white mb-0">Học tập, làm việc, chơi game hay thư giãn – một chiếc tai nghe chất lượng sẽ mang đến sự tập trung và cảm giác thoải mái suốt cả ngày.</p>
             </div>
             <div class="col-md-5 text-md-end wow fadeIn" data-wow-delay="0.5s">
                 <a asp-controller="Home" asp-action="About" class="btn btn-lg btn-secondary rounded-pill py-3 px-5">Truy cập ngay</a>
@@ -107,3 +109,50 @@
     </div>
 </div>
 <!-- Firm Visit End -->
+    <script>
+document.addEventListener("DOMContentLoaded", function () {
+
+    const items = document.querySelectorAll("#productList > div");
+    const filters = document.querySelectorAll("#categoryFilters .dropdown-item");
+    const dropdownButton = document.getElementById("categoryDropdown");
+
+    filters.forEach(item => {
+
+        item.addEventListener("click", function (e) {
+
+            e.preventDefault();
+
+            // bỏ active cũ
+            filters.forEach(x => x.classList.remove("active"));
+
+            // active mới
+            this.classList.add("active");
+
+            // đổi tên nút
+            dropdownButton.innerText = this.innerText;
+
+            let category = this.dataset.category;
+
+            items.forEach(product => {
+
+                if (category === "all") {
+
+                    product.style.display = "";
+
+                } else {
+
+                    if (product.dataset.category === category)
+                        product.style.display = "";
+                    else
+                        product.style.display = "none";
+
+                }
+
+            });
+
+        });
+
+    });
+
+});
+</script>

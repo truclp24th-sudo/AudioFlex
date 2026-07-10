@@ -40,10 +40,18 @@ var app = builder.Build();
 using (var scope = app.Services.CreateScope())
 {
     var context = scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
-    context.Database.Migrate();   // Áp dụng các migration còn thiếu (tương đương Update-Database)
-    DbInitializer.Seed(context);  // Chèn dữ liệu mẫu nếu database đang rỗng
+    try
+    {
+        context.Database.Migrate();
+        DbInitializer.Seed(context);
+    }
+    catch (Exception ex)
+    {
+        var logger = scope.ServiceProvider.GetRequiredService<ILogger<Program>>();
+        logger.LogError(ex, "Không kết nối/migrate được database lúc khởi động.");
+        // Không throw lại -> app vẫn start được, chỉ là DB chưa sẵn sàng
+    }
 }
-
 // ---------- HTTP request pipeline ----------
 if (!app.Environment.IsDevelopment())
 {
