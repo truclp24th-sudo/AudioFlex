@@ -1,4 +1,4 @@
-(function ($) {
+﻿(function ($) {
     "use strict";
 
     // Spinner
@@ -76,4 +76,26 @@
 
     
 })(jQuery);
+$(document).on('click', '.add-to-cart-btn', function (e) {
+    e.preventDefault();
+    var productId = $(this).data('id');
+
+    $.ajax({
+        url: '/Cart/Add',
+        type: 'POST',
+        data: { productId: productId, quantity: 1 },
+        success: function (res) {
+            if (res.success) {
+                $('#cartCount').text(res.cartCount);
+                // tuỳ chọn: hiện thông báo nhỏ
+                alert('Đã thêm vào giỏ hàng!');
+            } else {
+                alert(res.message || 'Có lỗi xảy ra');
+            }
+        },
+        error: function () {
+            alert('Không thể thêm vào giỏ hàng.');
+        }
+    });
+});
 

@@ -39,7 +39,9 @@
                     }
                 </div>
                 <p class="mb-4">@Model.Description</p>
-                <a href="javascript:void(0)" class="btn btn-primary rounded-pill py-3 px-5"><i class="fa fa-shopping-bag me-2"></i>Thêm vào giỏ hàng</a>
+                <a href="javascript:void(0)" class="btn btn-primary rounded-pill py-3 px-5 add-to-cart-btn" data-id="@Model.ProductId">
+                    <i class="fa fa-shopping-bag me-2"></i>Thêm vào giỏ hàng
+                </a>
                 <a asp-action="Index" class="btn btn-outline-primary rounded-pill py-3 px-5 ms-2">Quay lại danh sách</a>
             </div>
         </div>

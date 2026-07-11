@@ -3,6 +3,7 @@
     string active = ViewData["ActivePage"] as string ?? "";
     string username = Context.Session.GetString("Username");
     string role = Context.Session.GetString("Role");
+var cartCount = Context.Session.GetObject<List<CartItem>>("Cart")?.Sum(c => c.Quantity) ?? 0;
 }
 <!-- Navbar Start -->
 <div class="container-fluid fixed-top px-0 wow fadeIn" data-wow-delay="0.1s">
@@ -68,10 +69,10 @@
                         <small class="fa fa-user text-body"></small>
                     </a>
                 }
-                <a class="btn-sm-square bg-white rounded-circle ms-3 position-relative" asp-controller="Product" asp-action="Index" id="cartBtn">
-                    <small class="fa fa-shopping-bag text-body"></small>
-                    <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">0</span>
-                </a>
+            <a class="btn-sm-square bg-white rounded-circle ms-3 position-relative" asp-controller="Cart" asp-action="Index" id="cartBtn">
+                <small class="fa fa-shopping-bag text-body"></small>
+                <span id="cartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">@cartCount</span>
+            </a>
             </div>
         </div>
     </nav>
