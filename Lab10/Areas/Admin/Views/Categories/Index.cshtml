@@ -1,0 +1,47 @@
+@model IEnumerable<Category>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3 class="card-title">Danh sách danh mục</h3>
+    </div>
+    <div class="card-body">
+        <a asp-action="Create" class="btn btn-primary mb-3"><i class="bi bi-plus-lg me-1"></i>Thêm danh mục</a>
+        <table class="table table-bordered table-striped align-middle">
+            <thead>
+                <tr>
+                    <th style="width:60px">#</th>
+                    <th>Tên danh mục</th>
+                    <th>Mô tả</th>
+                    <th>Số sản phẩm</th>
+                    <th style="width:180px">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    int stt = 1;
+                    foreach (var category in Model)
+                    {
+                        <tr>
+                            <td>@(stt++)</td>
+                            <td>@category.CategoryName</td>
+                            <td>@category.Description</td>
+                            <td>@category.Products.Count</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@category.CategoryId" class="btn btn-sm btn-outline-primary"><i class="bi bi-pen"></i></a>
+                                <form asp-action="Delete" asp-route-id="@category.CategoryId" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc muốn xóa danh mục này?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash3"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="5" class="text-center text-muted py-4">Chưa có danh mục nào.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
