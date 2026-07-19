@@ -1,0 +1,47 @@
+@model IEnumerable<Blog>
+
+<div class="card mb-4">
+    <div class="card-header">
+        <h3 class="card-title">Danh sách tin tức</h3>
+    </div>
+    <div class="card-body">
+        <a asp-action="Create" class="btn btn-primary mb-3"><i class="bi bi-plus-lg me-1"></i>Thêm tin tức</a>
+        <table class="table table-bordered table-striped align-middle">
+            <thead>
+                <tr>
+                    <th style="width:60px">#</th>
+                    <th style="width:90px">Ảnh</th>
+                    <th>Tiêu đề</th>
+                    <th>Ngày đăng</th>
+                    <th style="width:160px">Thao tác</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model != null && Model.Any())
+                {
+                    int stt = 1;
+                    foreach (var blog in Model)
+                    {
+                        <tr>
+                            <td>@(stt++)</td>
+                            <td><img src="~/img/@blog.ImagePath" style="width:60px;height:60px;object-fit:cover;" /></td>
+                            <td>@blog.Title</td>
+                            <td>@blog.CreatedDate.ToString("dd/MM/yyyy")</td>
+                            <td>
+                                <a asp-action="Edit" asp-route-id="@blog.BlogId" class="btn btn-sm btn-outline-primary"><i class="bi bi-pen"></i></a>
+                                <form asp-action="Delete" asp-route-id="@blog.BlogId" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc muốn xóa tin tức này?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash3"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="5" class="text-center text-muted py-4">Chưa có tin tức nào.</td></tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
