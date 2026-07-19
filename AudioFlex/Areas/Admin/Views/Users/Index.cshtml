@@ -1,0 +1,67 @@
+@model IEnumerable<Account>
+
+    <div class="card mb-4">
+        <div class="card-header">
+            <h3 class="card-title">Danh sách tài khoản</h3>
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered table-striped align-middle">
+                <thead>
+                    <tr>
+                        <th style="width:60px">#</th>
+                        <th>Tên đăng nhập</th>
+                        <th>Họ tên</th>
+                        <th>Email</th>
+                        <th>Vai trò</th>
+                        <th>Ngày tạo</th>
+                        <th style="width:120px">Thao tác</th> <!-- Tăng độ rộng để đủ 2 nút -->
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model != null && Model.Any())
+                {
+                    int stt = 1; // Biến đếm số thứ tự
+
+                    foreach (var account in Model)
+                    {
+                    <tr>
+                        <td>@(stt++)</td> <!-- Hiển thị số thứ tự 1, 2, 3... -->
+                        <td>@account.Username</td>
+                        <td>@account.FullName</td>
+                        <td>@account.Email</td>
+                        <td>
+                            @if (account.Role == "Admin")
+                                {
+                            <span class="badge text-bg-danger">Admin</span>
+                                }
+                                else
+                                {
+                            <span class="badge text-bg-secondary">Khách hàng</span>
+                                }
+                        </td>
+                        <td>@account.CreatedDate.ToString("dd/MM/yyyy")</td>
+                        <td>
+                            <div class="d-flex gap-1">
+                                @* --- NÚT CẬP NHẬT MỚI THÊM --- *@
+                                <a asp-action="Edit" asp-route-id="@account.AccountId" class="btn btn-sm btn-outline-primary" title="Cập nhật/Phân quyền">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+
+                                @* --- FORM XÓA CŨ GIỮ NGUYÊN --- *@
+                                <form asp-action="Delete" asp-route-id="@account.AccountId" method="post" class="d-inline" onsubmit="return confirm('Bạn có chắc muốn xóa tài khoản này?');">
+                                    @Html.AntiForgeryToken()
+                                    <button type="submit" class="btn btn-sm btn-outline-danger"><i class="bi bi-trash3"></i></button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    }
+                }
+                else
+                {
+                    <tr><td colspan="7" class="text-center text-muted py-4">Chưa có tài khoản nào.</td></tr>
+                }
+                </tbody>
+            </table>
+        </div>
+    </div>

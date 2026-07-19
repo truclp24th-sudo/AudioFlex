@@ -1,0 +1,123 @@
+@model Contact
+@{
+    ViewData["Title"] = "Liên hệ";
+    // KHẮC PHỤC LỖI: Khai báo biến feedbackList lấy từ ViewBag
+    var feedbackList = ViewBag.FeedbackList as IEnumerable<AudioFlex.Models.Contact>;
+}
+
+<!-- Page Header Start -->
+<div class="container-fluid page-header wow fadeIn" data-wow-delay="0.1s">
+    <div class="container">
+        <h1 class="display-3 mb-3 animated slideInDown">Liên Hệ</h1>
+        <nav aria-label="breadcrumb animated slideInDown">
+            <ol class="breadcrumb mb-0">
+                <li class="breadcrumb-item"><a class="text-body" asp-controller="Home" asp-action="Index">Trang chủ</a></li>
+                <li class="breadcrumb-item text-dark active" aria-current="page">Liên hệ</li>
+            </ol>
+        </nav>
+    </div>
+</div>
+<!-- Page Header End -->
+<!-- Contact Start -->
+<div class="container-xxl py-6">
+    <div class="container">
+        <div class="section-header text-center mx-auto mb-5 wow fadeInUp" data-wow-delay="0.1s" style="max-width: 500px;">
+            <h1 class="display-5 mb-3">Liên Hệ Với Chúng Tôi</h1>
+            <p>Chúng tôi luôn sẵn lòng lắng nghe ý kiến và phản hồi từ bạn. Hãy để lại thông tin để được hỗ trợ nhanh nhất.</p>
+        </div>
+        <div class="row g-5 justify-content-center">
+            <div class="col-lg-5 col-md-12 wow fadeInUp" data-wow-delay="0.1s">
+                <div class="bg-primary text-white d-flex flex-column justify-content-center h-100 p-5">
+                    <h5 class="text-white">Liên hệ cho chúng tôi</h5>
+                    <p class="mb-5"><i class="fa fa-phone-alt me-3"></i>+84 123 456 789</p>
+                    <h5 class="text-white">Gửi email cho chúng tôi </h5>
+                    <p class="mb-5"><i class="fa fa-envelope me-3"></i>audioflex@gmail.com</p>
+                    <h5 class="text-white">Địa chỉ văn phòng</h5>
+                    <p class="mb-5"><i class="fa fa-map-marker-alt me-3"></i>TP.HCM, Việt Nam </p>
+                    <h5 class="text-white">Theo dõi chúng tôi</h5>
+                    <div class="d-flex pt-2">
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-twitter"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-facebook-f"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-1" href=""><i class="fab fa-youtube"></i></a>
+                        <a class="btn btn-square btn-outline-light rounded-circle me-0" href=""><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-12 wow fadeInUp" data-wow-delay="0.5s">
+                @if (TempData["ContactSuccess"] != null)
+                {
+                <div class="alert alert-success">@TempData["ContactSuccess"]</div>
+                }
+                <p class="mb-4">Mọi thắc mắc của bạn sẽ được giải đáp ngay. Hãy gửi tin nhắn cho chúng tôi và đội ngũ hỗ trợ sẽ liên hệ lại với bạn trong thời gian sớm nhất.</p>
+
+                <form asp-controller="Contact" asp-action="Index" method="post">
+                    @Html.AntiForgeryToken()
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input asp-for="Name" class="form-control" placeholder="Your Name">
+                                <label asp-for="Name">Họ và tên</label>
+                                <span asp-validation-for="Name" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-floating">
+                                <input asp-for="Email" class="form-control" placeholder="Your Email">
+                                <label asp-for="Email">Email</label>
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <div class="form-floating">
+                                <textarea asp-for="Message" class="form-control" placeholder="Leave a message here" style="height: 200px"></textarea>
+                                <label asp-for="Message">Nội dung</label>
+                                <span asp-validation-for="Message" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="col-12">
+                            <button class="btn btn-primary rounded-pill py-3 px-5" type="submit">Gửi tin nhắn</button>
+                        </div>
+                    </div>
+                </form>
+
+                <hr class="my-5" />
+
+                <!-- --- PHẦN PHẢN HỒI KHÁCH HÀNG --- -->
+                <div class="mt-5">
+                    <h3 class="mb-4"><i class="fa fa-comments text-primary me-2"></i>Khách hàng hỏi - Audio Flex đáp</h3>
+                    <div class="feedback-list">
+                        @if (feedbackList != null && feedbackList.Any())
+                        {
+                            foreach (var fb in feedbackList)
+                            {
+                        <div class="bg-light p-4 rounded shadow-sm mb-4 border-0 wow slideInUp" data-wow-delay="0.1s">
+                            <div class="d-flex justify-content-between align-items-center mb-2">
+                                <h6 class="text-primary fw-bold mb-0">@fb.Name</h6>
+                                <small class="text-muted"><i class="fa fa-calendar-alt me-1"></i>@fb.CreatedDate.ToString("dd/MM/yyyy")</small>
+                            </div>
+                            <p class="mb-3 text-dark">"@fb.Message"</p>
+
+                            @if (!string.IsNullOrEmpty(fb.AdminReply))
+                                    {
+                            <div class="ms-4 p-3 bg-white border-start border-success border-4 rounded shadow-sm">
+                                <strong class="text-success"><i class="fa fa-reply me-2"></i>Phản hồi từ Admin:</strong>
+                                <p class="mb-0 mt-2 text-dark">@fb.AdminReply</p>
+                            </div>
+                                    }
+                        </div>
+                            }
+                        }
+                        else
+                        {
+                        <p class="text-muted fst-italic">Chưa có phản hồi nào từ khách hàng.</p>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

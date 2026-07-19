@@ -1,0 +1,46 @@
+@model AudioFlex.Models.Account
+@{
+    ViewData["Title"] = "Cập nhật tài khoản";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Cập nhật tài khoản: @Model.Username</h6>
+    </div>
+    <div class="card-body">
+        <form asp-action="Edit">
+            <!-- Ẩn ID để gửi về server -->
+            <input type="hidden" asp-for="AccountId" />
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Tên đăng nhập</label>
+                    <input asp-for="Username" class="form-control bg-light" readonly />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Vai trò (Phân quyền)</label>
+                    <select asp-for="Role" class="form-select border-primary">
+                        <option value="Customer">Khách hàng</option>
+                        <option value="Admin">Quản trị viên</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="row mb-3">
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Họ tên</label>
+                    <input asp-for="FullName" class="form-control" />
+                </div>
+                <div class="col-md-6">
+                    <label class="form-label fw-bold">Email</label>
+                    <input asp-for="Email" type="email" class="form-control" />
+                </div>
+            </div>
+
+            <div class="mt-4">
+                <button type="submit" class="btn btn-primary px-4">Lưu thay đổi</button>
+                <a asp-action="Index" class="btn btn-secondary px-4">Quay lại</a>
+            </div>
+        </form>
+    </div>
+</div>

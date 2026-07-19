@@ -1,0 +1,97 @@
+@model List<CartItem>
+    @{
+    ViewData["Title"] = "Giỏ hàng";
+    var vi = new System.Globalization.CultureInfo("vi-VN");
+    }
+
+    @* Chỉnh margin-top cao lên (150px) để không bị Logo đè lên *@
+    <div class="container-xxl py-5" style="margin-top: 150px;">
+        <div class="container">
+            @* Tiêu đề nhỏ lại (h4), nằm bên trái *@
+            <h4 class="text-start mb-4 fw-bold text-uppercase" style="letter-spacing: 1px;">Giỏ hàng của bạn</h4>
+
+            @if (Model == null || !Model.Any())
+        {
+            <div class="text-center py-5">
+                <p class="text-muted">Giỏ hàng đang trống.</p>
+                <a asp-controller="Product" asp-action="Index" class="btn btn-primary rounded-pill">Tiếp tục mua sắm</a>
+            </div>
+        }
+        else
+        {
+            <div class="table-responsive shadow-sm rounded">
+                <table class="table align-middle border mb-0 small">
+                    <thead class="table-light">
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>Đơn giá</th>
+                            <th style="width:150px">Số lượng</th>
+                            <th>Thành tiền</th>
+                            <th style="width:80px">Xóa</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                        <tr>
+                            <td class="d-flex align-items-center">
+                                @* Hiển thị đúng ảnh màu đã chọn *@
+                                <img src="~/img/@item.ImagePath" width="60" height="60" class="me-3 border rounded" style="object-fit: cover;" />
+                                <div>
+                                    <div class="fw-bold">@item.ProductName</div>
+                                    <small class="text-muted">Màu: @item.ImagePath</small>
+                                </div>
+                            </td>
+                            <td>@item.Price.ToString("N0", vi) đ</td>
+                            <td>
+                                @* CẬP NHẬT: Form này cần gửi cả productId và imagePath *@
+                                <form asp-action="UpdateQuantity" method="post" class="d-flex align-items-center">
+                                    <input type="hidden" name="productId" value="@item.ProductId" />
+                                    <input type="hidden" name="imagePath" value="@item.ImagePath" />
+                                    <input type="number" name="quantity" value="@item.Quantity" min="1"
+                                           class="form-control form-control-sm" style="width:60px" />
+                                    <button type="submit" class="btn btn-sm btn-outline-primary ms-1" title="Cập nhật">
+                                        <i class="fa fa-sync-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
+                            <td class="text-primary fw-bold">@item.Total.ToString("N0", vi) đ</td>
+                            <td>
+                                @* CẬP NHẬT: Form xóa cần gửi cả productId và imagePath *@
+                                <form asp-action="Remove" method="post">
+                                    <input type="hidden" name="productId" value="@item.ProductId" />
+                                    <input type="hidden" name="imagePath" value="@item.ImagePath" />
+                                    <button type="submit" class="btn btn-sm btn-outline-danger" onclick="return confirm('Xóa sản phẩm này?')">
+                                        <i class="fa fa-trash"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-4 text-end">
+                <h5 class="mb-3">Tổng cộng: <span class="text-success">@Model.Sum(c => c.Total).ToString("N0", vi) đ</span></h5>
+
+                <div class="d-flex justify-content-end gap-2">
+                    <form asp-action="Clear" method="post" onsubmit="return confirm('Xoá toàn bộ giỏ hàng?')">
+                        <button type="submit" class="btn btn-outline-secondary rounded-pill">Xoá giỏ hàng</button>
+                    </form>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                    <a asp-controller="Order" asp-action="Checkout" class="btn btn-success rounded-pill px-4">Thanh toán</a>
+                    }
+                    else
+                    {
+                    <a asp-controller="Account" asp-action="Login" asp-route-returnUrl="/Order/Checkout" class="btn btn-warning rounded-pill">
+                        <i class="fa fa-lock me-1"></i> Đăng nhập để thanh toán
+                    </a>
+                    }
+                </div>
+            </div>
+        }
+        </div>
+    </div>
