@@ -1,0 +1,65 @@
+@model IEnumerable<AudioFlex.Models.Order>
+    @{
+    ViewData["Title"] = "Lịch sử đơn hàng";
+    var vi = new System.Globalization.CultureInfo("vi-VN");
+    }
+
+    @* Chỉnh margin-top cao lên (150px) để không bị Logo đè lên *@
+    <div class="container-xxl py-5" style="margin-top: 150px;">
+        <div class="container">
+            @* Tiêu đề nhỏ lại (h4), nằm bên trái, cách bảng 1 khoảng *@
+            <h4 class="text-start mb-4 fw-bold text-uppercase" style="letter-spacing: 1px;">Lịch sử đơn hàng</h4>
+
+            @* Bảng với chữ nhỏ gọn (small) *@
+            <div class="table-responsive shadow-sm rounded">
+                <table class="table table-hover align-middle border mb-0">
+                    <thead class="table-light">
+                        <tr>
+                            <th style="width: 100px;">Mã đơn</th>
+                            <th style="width: 150px;">Ảnh</th> @* CỘT ẢNH MỚI *@
+                            <th>Ngày đặt</th>
+                            <th>Tổng tiền</th>
+                            <th>Trạng thái</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                    {
+                        foreach (var item in Model)
+                        {
+                        <tr>
+                            <td><strong>#@item.OrderId</strong></td>
+                            <td>
+                                @* Duyệt qua các chi tiết đơn hàng để lấy ảnh sản phẩm *@
+                                <div class="d-flex flex-wrap gap-1">
+                                    @if (item.OrderDetails != null)
+                                        {
+                                            foreach (var detail in item.OrderDetails)
+                                            {
+                                    <img src="~/img/@detail.Product?.ImagePath"
+                                         title="@detail.Product?.ProductName"
+                                         style="width: 45px; height: 45px; object-fit: cover;"
+                                         class="border rounded shadow-sm" />
+                                            }
+                                        }
+                                </div>
+                            </td>
+                            <td>@item.OrderDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            <td class="text-success fw-bold">@item.TotalAmount.ToString("N0", vi) đ</td>
+                            <td>
+                                <span class="badge @(item.Status == "Đã giao" ? "bg-success" : "bg-info") p-2">
+                                    @item.Status
+                                </span>
+                            </td>
+                        </tr>
+                        }
+                    }
+                    else
+                    {
+                        <tr><td colspan="5" class="text-center py-5 text-muted">Bạn chưa có đơn hàng nào.</td></tr>
+                    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>

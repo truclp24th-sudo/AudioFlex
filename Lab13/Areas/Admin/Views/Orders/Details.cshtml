@@ -1,0 +1,99 @@
+@model Order
+@{
+    var vi = new System.Globalization.CultureInfo("vi-VN");
+    var statusList = ViewBag.StatusList as string[];
+}
+
+<div class="row">
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header"><h3 class="card-title">Thông tin đơn hàng #@Model.OrderId</h3></div>
+            <div class="card-body">
+                <p><strong>Khách hàng:</strong> @Model.CustomerName</p>
+                <p><strong>Số điện thoại:</strong> @Model.PhoneNumber</p>
+                <p><strong>Địa chỉ:</strong> @Model.Address</p>
+                <p><strong>Ngày đặt:</strong> @Model.OrderDate.ToString("dd/MM/yyyy HH:mm")</p>
+                <p><strong>Tổng tiền:</strong> @Model.TotalAmount.ToString("N0", vi) đ</p>
+                <p><strong>Tài khoản:</strong> @(Model.Account?.Username ?? "Khách vãng lai")</p>
+            </div>
+        </div>
+
+        <div class="card mb-4">
+            <div class="card-header"><h3 class="card-title">Cập nhật trạng thái</h3></div>
+            <div class="card-body">
+                <form asp-action="UpdateStatus" asp-route-id="@Model.OrderId" method="post" class="d-flex gap-2">
+                    @Html.AntiForgeryToken()
+                    <select name="status" class="form-select">
+                        @foreach (var s in statusList ?? Array.Empty<string>())
+                        {
+                            if (s == Model.Status)
+                            {
+                                <option value="@s" selected>@s</option>
+                            }
+                            else
+                            {
+                                <option value="@s">@s</option>
+                            }
+                        }
+                    </select>
+                    <button type="submit" class="btn btn-primary text-nowrap"><i class="bi bi-check-lg me-1"></i>Cập nhật</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="card mb-4">
+            <div class="card-header"><h3 class="card-title">Chi tiết sản phẩm</h3></div>
+            <div class="card-body p-0">
+                <table class="table table-striped mb-0">
+                    <thead>
+                        <tr>
+                            <th>Sản phẩm</th>
+                            <th>SL</th>
+                            <th>Đơn giá</th>
+                            <th>Thành tiền</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.OrderDetails != null && Model.OrderDetails.Any())
+    {
+        foreach (var detail in Model.OrderDetails)
+        {
+                        <tr>
+                            <td class="d-flex align-items-center">
+                                @if (detail.Product != null)
+                    {
+                                @* Hiển thị ảnh sản phẩm *@
+                                <img src="~/img/@detail.Product.ImagePath"
+                                     alt="@detail.Product.ProductName"
+                                     style="width: 50px; height: 50px; object-fit: cover;"
+                                     class="me-2 border rounded" />
+
+                                @* Hiển thị tên sản phẩm lấy từ bảng Product *@
+                                <span>@detail.Product.ProductName</span>
+                    }
+                    else
+                    {
+                                @* Nếu vì lý do gì đó bảng Product không load được, dùng tên lưu ở OrderDetail *@
+                                <span>@detail.ProductName</span>
+                    }
+                            </td>
+                            <td>@detail.Quantity</td>
+                            <td>@detail.Price.ToString("N0", vi) đ</td>
+                            <td>@((detail.Price * detail.Quantity).ToString("N0", vi)) đ</td>
+                        </tr>
+        }
+    }
+    else
+    {
+                        <tr><td colspan="4" class="text-center text-muted py-3">Không có chi tiết.</td></tr>
+    }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<a asp-action="Index" class="btn btn-secondary"><i class="bi bi-arrow-left me-1"></i>Quay lại danh sách</a>
